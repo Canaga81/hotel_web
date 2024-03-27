@@ -57,9 +57,28 @@ import { fadeIn } from "../variants";
 
 const Recommendation = () => {
   return (
-    <section className="pb-12 xl:pt-[157px] xl:pb-[112px] bg-soft_green-secondary relative">
-      <motion.div variants={fadeIn('up', 0.4)} initial='hidden' whileInView={'show'} viewport={{once: false, amount: 0}}>
-        <Swiper>
+    <motion.section
+      variants={fadeIn("up", 0.5)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0 }}
+      className="pb-12 xl:pt-[157px] xl:pb-[112px] bg-soft_green-secondary relative"
+    >
+      <motion.div
+        variants={fadeIn("up", 0.5)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0 }}
+      >
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: true,
+          }}
+          loop
+          speed={2000}
+        >
           {recommendationData.map((hotel, index) => (
             <SwiperSlide key={index}>
               <div className="flex flex-col xl:flex-row xl:pl-[135px] gap-y-12 xl:gap-y-0">
@@ -75,7 +94,7 @@ const Recommendation = () => {
                       Book Now
                     </Button>
                     <div className="text-black">
-                      <span className="font-bold text-2xl">{hotel.price}</span>
+                      <span className="font-bold text-2xl">{hotel.price}$</span>
                       <span className="text-sm">/Night</span>
                     </div>
                   </div>
@@ -92,8 +111,12 @@ const Recommendation = () => {
                       className="xl:rounded-tl-[20px] rounded-bl-[20px]"
                     />
                     <div className="bg-soft_green p-4 text-white text-center xl:text-left xl:max-w-[468px] xl:min-h-[212px] xl:absolute xl:bottom-0 xl:translate-x-1/2 xl:rounded-xl xl:px-10">
-                      <p className="mb-3 max-w-md mx-auto xl:max-w-none xl:mx-0 xl:mb-6">{hotel.testimonial.message}</p>
-                      <p className="text-xl font-bold">{hotel.testimonial.personName}</p>
+                      <p className="mb-3 max-w-md mx-auto xl:max-w-none xl:mx-0 xl:mb-6">
+                        {hotel.testimonial.message}
+                      </p>
+                      <p className="text-xl font-bold">
+                        {hotel.testimonial.personName}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -102,7 +125,16 @@ const Recommendation = () => {
           ))}
         </Swiper>
       </motion.div>
-    </section>
+
+      {/* pattern */}
+      <Image
+        src={"/recommendation/pattern.svg"}
+        alt="pattern_image"
+        width={240}
+        height={240}
+        className="hidden xl:flex absolute left-[135px] -bottom-[120px]"
+      />
+    </motion.section>
   );
 };
 
